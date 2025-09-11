@@ -9,13 +9,26 @@ class DoneProgressIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<KanbanProvider>(
       builder: (_, provider, child) {
-        debugPrint('value: ${provider.value}');
-        final value = provider.value;
-        final valueString = value == 0
-            ? '없음' //
-            : value.toString();
+        final todoCount = 0;
+        final doneCount = 3;
 
-        return Text(provider.value.toString(), style: TextStyle(fontSize: 20));
+        return Row(
+          spacing: 8 ,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SizedBox(
+              width: 24,
+              height: 24,
+              child: CircularProgressIndicator(
+                value: todoCount / doneCount,
+                color: Colors.green,
+                backgroundColor: Colors.grey,
+                strokeWidth: 4,
+              ),
+            ),
+            Text('$doneCount / $todoCount 완료', style: TextStyle(fontSize: 17)),
+          ],
+        );
       },
     );
   }

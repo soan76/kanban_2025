@@ -12,7 +12,7 @@ class TopContainer extends StatelessWidget {
       icon: Icon(LucideIcons.smile, size: 28),
       title: Row(
         children: [
-          Expanded(child: Text('Kanban Board', style: TextStyle(fontSize: 26))),
+          Expanded(child: Text('Kanban Board', style: TextStyle(fontSize: 22))),
           DoneProgressIndicator(),
         ],
       ),
