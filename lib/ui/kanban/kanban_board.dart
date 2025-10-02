@@ -14,21 +14,19 @@ class KanbanBoard extends StatelessWidget {
       builder: (context, provider, child) {
         final status = provider.kanvanStatus;
         return ShadTabs(
-              value: status,
-              expandContent: true,
-              contentConstraints: BoxConstraints.expand(
-                height: 0,
-              ),
-              tabs: KanbanStatus.values
-                .map(
-                  (e) => ShadTab(
-                    value: e, 
-                    content: KanbanList(status: e),
-                    child: Text(e.label),
-                ),
-              ).toList(),
+          value: status,
+          expandContent: true,
+          contentConstraints: const BoxConstraints.expand(height: 0),
+          tabs: KanbanStatus.values.map((e) {
+            return ShadTab(
+              onPressed: () => provider.setKanbanStatus(e),
+              value: e,
+              content: KanbanList(status: e),
+              child: Text(e.label),
             );
-          }
+          }).toList(),
         );
-      }
+      },
+    );
+  }
 }

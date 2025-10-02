@@ -26,7 +26,7 @@ class KanbanList extends StatelessWidget{
               child: Consumer<KanbanProvider>(
                 builder: (context, provider, _) {
                   final items = provider.items;
-                  final searchedItems = items.where((e) => e.$1 == status).toList();
+                  final searchedItems = items.where((e) => e.status == status).toList();
 
                   return ListView.separated(
                     itemCount: searchedItems.length,
@@ -34,15 +34,17 @@ class KanbanList extends StatelessWidget{
                     cacheExtent: 1,
                     separatorBuilder: (context, index) => SizedBox(height: 20),
                     itemBuilder: (context, index) {
+                      final item = searchedItems[index];
+
                       return KanbanItem(
                         status: status,
-                        title: 'New Task ${index + 1}',
+                        title: item.title,
                         onCheckbox: () {
                           debugPrint('$status -> 체크박스');
                         },
                         onDelete: () {
                           debugPrint('$status -> 삭제');
-                          context.read<KanbanProvider>().deleteItem(index);
+                          provider.deleteItem(item.id);
                         },
                         onStatus: () {
                           
